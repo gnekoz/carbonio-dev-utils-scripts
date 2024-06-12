@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #
-# Common functions for Carbonio frontent development utility commands
+# Common functions for Carbonio frontend development utility commands
 #
 
 # Available modules
