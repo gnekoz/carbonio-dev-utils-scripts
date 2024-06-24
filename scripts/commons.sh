@@ -3,6 +3,12 @@
 #
 # Common functions for Carbonio frontend development utility commands
 #
+CARBONIO_UTILS_HOME=~/.carbonio-dev-utils
+MODULES_ALIAS_FILENAME=modules-alias
+HOSTS_ALIAS_FILENAME=hosts-alias
+
+# Checks home and creates it if not exists
+mkdir -p $CARBONIO_UTILS_HOME
 
 # Available modules
 MODULES=("contacts" "calendars" "mails" "addressbook" "shell" "design-system" "auth" "preview" "files")
