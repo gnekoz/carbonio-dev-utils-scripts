@@ -26,7 +26,7 @@ if [[ " $@ " =~ " help " ]]; then
     exit 0
 fi
 
-if [[ $# < 1 && $# > 2 ]]; then
+if [[ $# < 1 || $# > 2 ]]; then
     help
     exit 1
 fi
