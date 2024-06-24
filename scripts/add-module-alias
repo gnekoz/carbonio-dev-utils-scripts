@@ -1,0 +1,31 @@
+#!/bin/bash
+
+source commons.sh
+
+function help() {
+	echo "add-module-alias help         show this help"
+	echo "add-module-alias ALIAS PATH   add the alias for the given module path"
+	echo 
+	echo "  Example:        add-module-alias mails ~/development/carbonio/carbonio-mails-ui" 
+}
+
+
+# Arguments check
+if [[ " $@ " =~ " help " ]]; then
+    help
+    exit 0
+fi
+
+if [[ $# < 1 || $# > 2 ]]; then
+   echo "Wrong number of arguments" 1>&2;
+    help
+    exit 1
+fi
+
+alias=$1
+modulePath=$2
+
+# TODO Check if alias already exists
+#grep
+
+echo -e "$alias\t\t$modulePath" >> "$CARBONIO_UTILS_HOME/$MODULES_ALIAS_FILENAME"
