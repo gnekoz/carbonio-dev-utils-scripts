@@ -28,4 +28,4 @@ modulePath=$2
 # TODO Check if alias already exists
 #grep
 
-echo -e "$alias\t\t$modulePath" >> "$CARBONIO_UTILS_HOME/$MODULES_ALIAS_FILENAME"
+echo -e "$alias\t\t$modulePath" >> $MODULES_ALIAS_FILENAME

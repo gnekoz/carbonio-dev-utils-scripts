@@ -4,8 +4,8 @@
 # Common functions for Carbonio frontend development utility commands
 #
 CARBONIO_UTILS_HOME=~/.carbonio-dev-utils
-MODULES_ALIAS_FILENAME=modules-alias
-HOSTS_ALIAS_FILENAME=hosts-alias
+MODULES_ALIAS_FILENAME=$CARBONIO_UTILS_HOME/modules-alias
+HOSTS_ALIAS_FILENAME=$CARBONIO_UTILS_HOME/hosts-alias
 
 # Checks home and creates it if not exists
 mkdir -p $CARBONIO_UTILS_HOME
@@ -23,5 +23,18 @@ function getModulesListDescription() {
 function getModulePath() {
     module=$1
     sedScript="s/^$module[[:space:]]+(.*)$/\1/p"
-    echo -n $(sed -Ern $sedScript < $CARBONIO_UTILS_HOME/$MODULES_ALIAS_FILENAME)
+    echo -n $(sed -Ern $sedScript < $MODULES_ALIAS_FILENAME)
+} 
+
+# Print the hostname of the given host alias
+# param 1 = host alias
+function getHostname() {
+    if [ ! -f $HOSTS_ALIAS_FILENAME ]
+    then
+        return 1
+    fi
+
+    alias=$1
+    sedScript="s/^$alias[[:space:]]+(.*)$/\1/p"
+    echo -n $(sed -Ern $sedScript < $HOSTS_ALIAS_FILENAME)
 } 

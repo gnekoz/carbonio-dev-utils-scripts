@@ -10,14 +10,9 @@ echo "                ▀                                           "
 echo
                                                             
 
-
-MODULES=("contacts" "calendars" "mails" "shell" "auth")
-
 function help() {
 	echo "deploy-design-system help             show this help"
-	echo "deploy-design-system MODULE           deploy the design system on the selected module"
-	echo 
-	echo "  MODULE        [contacts|calendars|mails|shell|auth]"
+	echo "deploy-design-system MODULEALIAS      deploy the design system on the selected module"
 }
 
 
