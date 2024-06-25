@@ -21,8 +21,12 @@ function getModulesListDescription() {
 # Print the path of the given module alias
 # param 1 = module alias
 function getModulePath() {
-    module=$1
-    sedScript="s/^$module[[:space:]]+(.*)$/\1/p"
+    if [ ! -f $MODULES_ALIAS_FILENAME ]
+    then
+        return 1
+    fi
+    alias=$1
+    sedScript="s/^$alias[[:space:]]+(.*)$/\1/p"
     echo -n $(sed -Ern $sedScript < $MODULES_ALIAS_FILENAME)
 } 
 
