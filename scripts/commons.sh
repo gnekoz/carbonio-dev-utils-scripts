@@ -18,15 +18,10 @@ function getModulesListDescription() {
     echo -n "[contacts|calendars|mails|addressbook|shell|design-system|auth|preview|files]"
 }
 
-# Print the path of the given module
-# param 1 = module name
+# Print the path of the given module alias
+# param 1 = module alias
 function getModulePath() {
     module=$1
-    if [[ " ${module} " == " design-system " ]]; then
-	    echo -n "carbonio-design-system"
-    elif [[ " ${module} " == " preview " ]]; then
-        echo -n "carbonio-ui-preview"
-    else
-	    echo -n "carbonio-${module}-ui"
-    fi
+    sedScript="s/^$module[[:space:]]+(.*)$/\1/p"
+    echo -n $(sed -Ern $sedScript < $CARBONIO_UTILS_HOME/$MODULES_ALIAS_FILENAME)
 } 
