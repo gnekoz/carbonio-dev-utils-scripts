@@ -3,10 +3,10 @@
 source commons.sh
 
 function help() {
-	echo "add-module-alias help         show this help"
-	echo "add-module-alias ALIAS PATH   add the alias for the given module path"
+	echo "add-module-alias.sh help         show this help"
+	echo "add-module-alias.sh ALIAS PATH   add the alias for the given module path"
 	echo 
-	echo "  Example:        add-module-alias mails ~/development/carbonio/carbonio-mails-ui" 
+	echo "  Example:        add-module-alias.sh mails ~/development/carbonio/carbonio-mails-ui" 
 }
 
 

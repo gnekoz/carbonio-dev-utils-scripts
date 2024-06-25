@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source commons.sh
+
 echo 
 echo "██▄   ▄███▄   █ ▄▄  █    ████▄ ▀▄    ▄     █ ▄▄  █▄▄▄▄ ▄███▄      ▄   ▄█ ▄███▄     ▄ ▄   "
 echo "█  █  █▀   ▀  █   █ █    █   █   █  █      █   █ █  ▄▀ █▀   ▀      █  ██ █▀   ▀   █   █  "
@@ -10,39 +12,35 @@ echo "                ▀                            ▀    ▀              █
 echo "                                                                 ▐                       "
 echo
 
-MODULES=("contacts" "calendars" "mails" "shell" "auth")
-
+\
 function help() {
-	echo "deploy-preview help             show this help"
-	echo "deploy-preview MODULE           deploy the preview on the selected module"
-	echo 
-	echo "  MODULE        [contacts|calendars|mails|shell|auth]"
+	echo "deploy-preview.sh help             show this help"
+	echo "deploy-preview.sh MODULE_ALIAS     deploy the preview on the selected module"
 }
 
-
 # Arguments check
-if [[ " $@ " =~ " help " ]]; then
+if [[ " $@ " =~ " help " || $# != 1 ]]; then
     help
     exit 0
 fi
 
-
-if [[ $# > 0 ]]; then
-  module=$1
-else
-  module="shell"
+# Get the preview project path
+coreModulePath=$(getCoreModulePath $CORE_MODULE_PREVIEW)
+if [ "$coreModulePath" == "" ]
+then
+  echo "Error: 'Carbonio Preview UI' core module is not defined" 1>&2;
+  echo "Run setup-core-modules-alias.sh" 1>&2;
+  exit 1
 fi
 
-
-# Check module argumnent
-if [[ ! " ${MODULES[*]} " =~ " ${module} " ]]; then
-    echo "Wrong module"
-    help
+# Get the destination module project path
+alias=$1
+destinationProjectPath=$(getModulePath $alias)
+if [[ "X$destinationProjectPath" == "X" ]]; then
+    echo "Error: Module alias '$alias' not recognized"  1>&2;
+    echo "Run add-module-alias.sh $alias PROJECT_PATH"  1>&2;
     exit 2
 fi
 
-# Get project path
-projectPath="carbonio-${module}-ui"
-
-echo "Delopying the preview on $projectPath..."
-(cd carbonio-ui-preview && PKG_PATH=../$projectPath/ npm run deploy -u --legacy-peer-deps)
+echo "Deploying the 'Carbonio Preview UI' on $destinationProjectPath..."
+(eval cd $coreModulePath && PKG_PATH=$destinationProjectPath npm run deploy -u --legacy-peer-deps)

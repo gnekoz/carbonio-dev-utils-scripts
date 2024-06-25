@@ -12,11 +12,8 @@ echo "                ▀                            ▀                ▀▀�
 echo
 
 function help() {
-	echo "deploy-module help                  show this help"
-	echo "deploy-module MODULE [VMNUMBER]     run the module on the selected VM"
-	echo 
-	echo "  MODULE        $(getModulesListDescription)" 
-	echo "  VMNUMBER      (dafault 5) eg. 5 for co-dev-pry5.demo.zextras.io"
+	echo "deploy-module.sh help                      show this help"
+	echo "deploy-module.sh MODULE_ALIAS HOST_ALIAS   run the module on the selected host"
 }
 
 
@@ -31,31 +28,26 @@ if [[ $# < 1 || $# > 2 ]]; then
     exit 1
 fi
 
-module=$1
-
-if [[ $# -eq 2 ]]; then
-  destination=$2
-else
-  destination=5
-fi
-
-
-# Check module argumnent
-if [[ ! " ${MODULES[*]} " =~ " ${module} " ]]; then
-    echo "Wrong module"
-    help
+# Get the module project path
+moduleAlias=$1
+moduleProjectPath=$(getModulePath $moduleAlias)
+if [[ "X$moduleProjectPath" == "X" ]]; then
+    echo "Error: Module alias '$moduleAlias' not recognized"  1>&2;
+    echo "Run add-module-alias.sh $moduleAlias PROJECT_PATH"  1>&2;
     exit 2
 fi
 
-# Get project path
-projectPath=$(getModulePath $module)
+# Get the destination hostname
+hostAlias=$2
+hostname=$(getHostname $hostAlias)
+if [[ "X$hostname" == "X" ]]; then
+    echo "Error: Host alias '$hostAlias' not recognized"  1>&2;
+    echo "Run add-host-alias.sh $hostAlias HOSTNAME"  1>&2;
+    exit 2
+fi
 
-# Compose server name
-server="co-dev-pry${destination}.demo.zextras.io"
-
-
-
-(cd $projectPath && npm run deploy -- -h $server)
+# Deploy
+(eval cd $moduleProjectPath && npm run deploy -- -h $hostname)
 
 exit 0
 

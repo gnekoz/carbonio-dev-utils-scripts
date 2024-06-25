@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source commons.sh
+
 echo 
 echo "██▄   ▄███▄   █ ▄▄  █    ████▄ ▀▄    ▄     ██▄      ▄▄▄▄▄   "
 echo "█  █  █▀   ▀  █   █ █    █   █   █  █      █  █    █     ▀▄ "
@@ -11,34 +13,34 @@ echo
                                                             
 
 function help() {
-	echo "deploy-design-system help             show this help"
-	echo "deploy-design-system MODULEALIAS      deploy the design system on the selected module"
+	echo "deploy-design-system.sh help             show this help"
+	echo "deploy-design-system.sh MODULE_ALIAS     deploy the design system on the selected module"
 }
 
 
 # Arguments check
-if [[ " $@ " =~ " help " ]]; then
+if [[ " $@ " =~ " help " || $# != 1 ]]; then
     help
     exit 0
 fi
 
-
-if [[ $# > 0 ]]; then
-  module=$1
-else
-  module="shell"
+# Get the DS project path
+dsPath=$(getCoreModulePath $CORE_MODULE_DS)
+if [ "$dsPath" == "" ]
+then
+  echo "Error: Carbonio design system core module is not defined" 1>&2;
+  echo "Run setup-core-modules-alias.sh" 1>&2;
+  exit 1
 fi
 
-
-# Check module argumnent
-if [[ ! " ${MODULES[*]} " =~ " ${module} " ]]; then
-    echo "Wrong module"
-    help
+# Get the destination module project path
+alias=$1
+destinationProjectPath=$(getModulePath $alias)
+if [[ "X$destinationProjectPath" == "X" ]]; then
+    echo "Error: Module alias '$alias' not recognized"  1>&2;
+    echo "Run add-module-alias.sh $alias PROJECT_PATH"  1>&2;
     exit 2
 fi
 
-# Get project path
-projectPath="carbonio-${module}-ui"
-
-echo "Delopying the design system on $projectPath..."
-(cd carbonio-design-system && PKG_PATH=../$projectPath/ npm run deploy -u --legacy-peer-deps)
+echo "Deploying the design system on $destinationProjectPath..."
+(eval cd $dsPath && PKG_PATH=$destinationProjectPath npm run deploy -u --legacy-peer-deps)

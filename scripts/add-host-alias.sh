@@ -3,12 +3,12 @@
 source commons.sh
 
 function help() {
-	echo "add-host-alias help               show this help"
-	echo "add-host-alias ALIAS HOSTNAME     add the alias for the given host"
+	echo "add-host-alias.sh help               show this help"
+	echo "add-host-alias.sh ALIAS HOSTNAME     add the alias for the given host"
 	echo 
 	echo "  Examples:"
-    echo "    add-host-alias crb2 crb2.zimbraopen.com" 
-    echo "    add-host-alias vm5 co-dev-pry5.demo.zextras.io" 
+    echo "    add-host-alias.sh crb2 crb2.zimbraopen.com" 
+    echo "    add-host-alias.sh vm5 co-dev-pry5.demo.zextras.io" 
 }
 
 
