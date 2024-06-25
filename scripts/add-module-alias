@@ -25,7 +25,11 @@ fi
 alias=$1
 modulePath=$2
 
-# TODO Check if alias already exists
-#grep
+# Check if alias already exists
+if [ "$(getModulePath $alias)" != "" ]
+then
+  echo "Alias already exists" 1>&2;
+  exit 2
+fi
 
 echo -e "$alias\t\t$modulePath" >> $MODULES_ALIAS_FILENAME
