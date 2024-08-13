@@ -10,11 +10,11 @@ echo "█  █  █▄   ▄▀ █     ███▄ ▀████    █     
 echo "███▀  ▀███▀    █        ▀       ▄▀                       █  ▀███▀       ▀    ▀ "
 echo "                ▀                                       ▀                      "
 echo
-                                                                               
+
 
 function help() {
 	echo "deploy-shell.sh help             show this help"
-	echo "deploy-shell.sh MODULE_ALIAS     deploy the design system on the selected module"
+	echo "deploy-shell.sh MODULE_ALIAS     deploy the Shell on the selected module"
 }
 
 
