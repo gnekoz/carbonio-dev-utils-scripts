@@ -1,7 +1,5 @@
 #!/bin/bash
 
-source commons.sh
-
 function help() {
 	echo "add-host-alias.sh help               show this help"
 	echo "add-host-alias.sh ALIAS HOSTNAME     add the alias for the given host"
@@ -11,6 +9,9 @@ function help() {
     echo "    add-host-alias.sh vm5 co-dev-pry5.demo.zextras.io" 
 }
 
+
+SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
+source "$SCRIPT_DIR/commons.sh"
 
 # Arguments check
 if [[ " $@ " =~ " help " ]]

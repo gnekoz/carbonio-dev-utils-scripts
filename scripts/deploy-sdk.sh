@@ -1,7 +1,5 @@
 #!/bin/bash
 
-source commons.sh
-
 echo "▓█████▄ ▓█████  ██▓███   ██▓     ▒█████ ▓██   ██▓     ██████ ▓█████▄  ██ ▄█▀";
 echo "▒██▀ ██▌▓█   ▀ ▓██░  ██▒▓██▒    ▒██▒  ██▒▒██  ██▒   ▒██    ▒ ▒██▀ ██▌ ██▄█▒ ";
 echo "░██   █▌▒███   ▓██░ ██▓▒▒██░    ▒██░  ██▒ ▒██ ██░   ░ ▓██▄   ░██   █▌▓███▄░ ";
@@ -19,6 +17,9 @@ function help() {
 	echo "deploy-sdk.sh MODULE_ALIAS     deploy the SDK on the selected module"
 }
 
+
+SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
+source "$SCRIPT_DIR/commons.sh"
 
 # Arguments check
 if [[ " $@ " =~ " help " || $# != 1 ]]; then

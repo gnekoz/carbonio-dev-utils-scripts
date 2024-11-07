@@ -1,7 +1,5 @@
 #!/bin/bash
 
-source commons.sh
-
 function help() {
 	echo "add-module-alias.sh help         show this help"
 	echo "add-module-alias.sh ALIAS PATH   add the alias for the given module path"
@@ -9,6 +7,9 @@ function help() {
 	echo "  Example:        add-module-alias.sh mails ~/development/carbonio/carbonio-mails-ui" 
 }
 
+
+SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
+source "$SCRIPT_DIR/commons.sh"
 
 # Arguments check
 if [[ " $@ " =~ " help " ]]; then

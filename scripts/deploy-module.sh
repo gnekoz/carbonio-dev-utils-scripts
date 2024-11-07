@@ -1,7 +1,5 @@
 #!/bin/bash
 
-source commons.sh
-
 echo 
 echo "██▄   ▄███▄   █ ▄▄  █    ████▄ ▀▄    ▄     █▀▄▀█ ████▄ ██▄     ▄   █     ▄███▄"   
 echo "█  █  █▀   ▀  █   █ █    █   █   █  █      █ █ █ █   █ █  █     █  █     █▀   ▀"  
@@ -16,6 +14,9 @@ function help() {
 	echo "deploy-module.sh MODULE_ALIAS HOST_ALIAS   run the module on the selected host"
 }
 
+
+SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
+source "$SCRIPT_DIR/commons.sh"
 
 # Arguments check
 if [[ " $@ " =~ " help " ]]; then

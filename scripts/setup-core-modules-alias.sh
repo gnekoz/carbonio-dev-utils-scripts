@@ -1,6 +1,7 @@
 #!/bin/bash
 
-source commons.sh
+SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
+source "$SCRIPT_DIR/commons.sh"
 
 projectsPaths=()
 for index in "${!CORE_MODULES[@]}"
