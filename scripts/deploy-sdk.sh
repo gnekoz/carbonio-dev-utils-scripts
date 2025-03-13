@@ -27,7 +27,7 @@ if [[ " $@ " =~ " help " || $# != 1 ]]; then
     exit 0
 fi
 
-# Get the preview project path
+# Get the sdk project path
 coreModulePath=$(getCoreModulePath $CORE_MODULE_SDK)
 if [ "$coreModulePath" == "" ]
 then
