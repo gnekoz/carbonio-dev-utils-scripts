@@ -17,6 +17,7 @@ A bunch of helper scripts for lazy and forgetful developers
 | add-module-alias.sh         | register the alias and the project path for a Carbonio module                                    |
 | add-host-alias.sh           | register the alias and the hostname path for a server                                            |
 | deploy-module.sh            | deploys a module into a server                                                                   |
+| deploy-module-k3d.sh        | deploys a module into a pod of carbonio-k3d (default pod: carbonio-composed-ui-0)               |
 | run-module.sh               | run the project in watch-mode                                                                    |
 | deploy-design-system.sh     | deploys the Carbonio Design System into a project folder in order to use the latest DS exports   |
 | deploy-preview.sh           | deploys the Carbonio Preview UI into a project folder in order to use the latest Preview exports |
