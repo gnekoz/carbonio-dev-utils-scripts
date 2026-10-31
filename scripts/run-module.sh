@@ -48,7 +48,7 @@ if [[ "X$hostname" == "X" ]]; then
     exit 2
 fi
 
-(eval cd $moduleProjectPath && npm run start -- -h $hostname)
+(eval cd $moduleProjectPath && pnpm run start -h $hostname)
 
 exit 0
 

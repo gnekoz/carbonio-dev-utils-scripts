@@ -44,4 +44,4 @@ if [[ "X$destinationProjectPath" == "X" ]]; then
 fi
 
 echo "Deploying the 'Carbonio Shell UI' on $destinationProjectPath..."
-(eval cd $coreModulePath && PKG_PATH=$destinationProjectPath npm run deploy-on-module -u --legacy-peer-deps)
+(eval cd $coreModulePath && PKG_PATH=$destinationProjectPath pnpm run deploy-on-module)

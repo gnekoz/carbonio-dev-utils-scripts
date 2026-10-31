@@ -48,7 +48,7 @@ if [[ "X$hostname" == "X" ]]; then
 fi
 
 # Deploy
-(eval cd $moduleProjectPath && npm run deploy -- -h $hostname)
+(eval cd $moduleProjectPath && pnpm run deploy -h $hostname)
 
 exit 0
 
