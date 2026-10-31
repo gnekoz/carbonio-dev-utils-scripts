@@ -44,4 +44,4 @@ if [[ "X$destinationProjectPath" == "X" ]]; then
 fi
 
 echo "Deploying the design system on $destinationProjectPath..."
-(eval cd $dsPath && PKG_PATH=$destinationProjectPath npm run deploy -u --legacy-peer-deps)
+(eval cd $dsPath && PKG_PATH=$destinationProjectPath pnpm run deploy)
